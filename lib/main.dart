@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    srcObj = SPORTSHIRT;
+    srcObj = shirtObj;
     controller.onModelLoaded.addListener(() {
       debugPrint('model is loaded : ${controller.onModelLoaded.value}');
     });
