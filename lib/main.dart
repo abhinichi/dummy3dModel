@@ -81,94 +81,96 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(
-            onPressed: () {
-              // controller.playAnimation();
-            },
-            icon: const Icon(Icons.next_plan_outlined),
-          ),
-          IconButton(
-            onPressed: () {
-              controller.playAnimation();
-            },
-            icon: const Icon(Icons.play_arrow),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          IconButton(
-            onPressed: () {
-              controller.pauseAnimation();
-              //controller.stopAnimation();
-            },
-            icon: const Icon(Icons.pause),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          IconButton(
-            onPressed: () {
-              controller.resetAnimation();
-            },
-            icon: const Icon(Icons.replay),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          IconButton(
-            onPressed: () async {
-              List<String> availableAnimations =
-              await controller.getAvailableAnimations();
-              debugPrint(
-                  'Animations : $availableAnimations --- Length : ${availableAnimations.length}');
-              chosenAnimation = await showPickerDialog(
-                  'Animations', availableAnimations, chosenAnimation);
-              //Play animation with loop count
-              controller.playAnimation(
-                animationName: chosenAnimation,
-                loopCount: 2,
-              );
-            },
-            icon: const Icon(Icons.format_list_bulleted_outlined),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          IconButton(
-            onPressed: () async {
-              List<String> availableTextures =
-              await controller.getAvailableTextures();
-              debugPrint(
-                  'Textures : $availableTextures --- Length : ${availableTextures.length}');
-              chosenTexture = await showPickerDialog(
-                  'Textures', availableTextures, chosenTexture);
-              controller.setTexture(textureName: chosenTexture ?? '');
-            },
-            icon: const Icon(Icons.list_alt_rounded),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          IconButton(
-            onPressed: () {
-              controller.setCameraOrbit(20, 20, 5);
-              //controller.setCameraTarget(0.3, 0.2, 0.4);
-            },
-            icon: const Icon(Icons.camera_alt_outlined),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          IconButton(
-            onPressed: () {
-              controller.resetCameraOrbit();
-              //controller.resetCameraTarget();
-            },
-            icon: const Icon(Icons.cameraswitch_outlined),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
+          /// not needed for obj file
+          /// this functions are for glb file
+          // IconButton(
+          //   onPressed: () {
+          //     // controller.playAnimation();
+          //   },
+          //   icon: const Icon(Icons.next_plan_outlined),
+          // ),
+          // IconButton(
+          //   onPressed: () {
+          //     controller.playAnimation();
+          //   },
+          //   icon: const Icon(Icons.play_arrow),
+          // ),
+          // const SizedBox(
+          //   height: 4,
+          // ),
+          // IconButton(
+          //   onPressed: () {
+          //     controller.pauseAnimation();
+          //     //controller.stopAnimation();
+          //   },
+          //   icon: const Icon(Icons.pause),
+          // ),
+          // const SizedBox(
+          //   height: 4,
+          // ),
+          // IconButton(
+          //   onPressed: () {
+          //     controller.resetAnimation();
+          //   },
+          //   icon: const Icon(Icons.replay),
+          // ),
+          // const SizedBox(
+          //   height: 4,
+          // ),
+          // IconButton(
+          //   onPressed: () async {
+          //     List<String> availableAnimations =
+          //     await controller.getAvailableAnimations();
+          //     debugPrint(
+          //         'Animations : $availableAnimations --- Length : ${availableAnimations.length}');
+          //     chosenAnimation = await showPickerDialog(
+          //         'Animations', availableAnimations, chosenAnimation);
+          //     //Play animation with loop count
+          //     controller.playAnimation(
+          //       animationName: chosenAnimation,
+          //       loopCount: 2,
+          //     );
+          //   },
+          //   icon: const Icon(Icons.format_list_bulleted_outlined),
+          // ),
+          // const SizedBox(
+          //   height: 4,
+          // ),
+          // IconButton(
+          //   onPressed: () async {
+          //     List<String> availableTextures =
+          //     await controller.getAvailableTextures();
+          //     debugPrint(
+          //         'Textures : $availableTextures --- Length : ${availableTextures.length}');
+          //     chosenTexture = await showPickerDialog(
+          //         'Textures', availableTextures, chosenTexture);
+          //     controller.setTexture(textureName: chosenTexture ?? '');
+          //   },
+          //   icon: const Icon(Icons.list_alt_rounded),
+          // ),
+          // const SizedBox(
+          //   height: 4,
+          // ),
+          // IconButton(
+          //   onPressed: () {
+          //     controller.setCameraOrbit(20, 20, 5);
+          //     //controller.setCameraTarget(0.3, 0.2, 0.4);
+          //   },
+          //   icon: const Icon(Icons.camera_alt_outlined),
+          // ),
+          // const SizedBox(
+          //   height: 4,
+          // ),
+          // IconButton(
+          //   onPressed: () {
+          //     controller.resetCameraOrbit();
+          //     //controller.resetCameraTarget();
+          //   },
+          //   icon: const Icon(Icons.cameraswitch_outlined),
+          // ),
+          // const SizedBox(
+          //   height: 4,
+          // ),
           IconButton(
             onPressed: () {
               setState(() {
