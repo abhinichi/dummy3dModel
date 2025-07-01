@@ -1,0 +1,13 @@
+newmtl lambert4SG
+illum 4
+Kd 1.00 0.00 0.00   # Red diffuse color
+Ka 1.00 0.00 0.00   # Red ambient color
+Tf 1.00 1.00 1.00
+Ni 1.00
+
+newmtl tshirt:lambert1SG
+illum 4
+Kd 0.00 0.00 1.00   # Blue diffuse color
+Ka 0.00 0.00 1.00   # Blue ambient color
+Tf 1.00 1.00 1.00
+Ni 1.00

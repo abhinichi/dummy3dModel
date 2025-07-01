@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+    <Header>
+        <MEDIUM_PROPERTY_VERSION>1.0</MEDIUM_PROPERTY_VERSION>
+    </Header>
+    <Medium>
+        <mediumType>0</mediumType>
+        <Image>
+            <viewPoint>0</viewPoint>
+            <useRenderAllColorways>false</useRenderAllColorways>
+        </Image>
+        <TurntableImage>
+            <imageCount>0</imageCount>
+            <direction>0</direction>
+        </TurntableImage>
+        <TurntableVideo>
+            <frameCount>0</frameCount>
+            <totalDuration>4</totalDuration>
+            <frameDuration>1</frameDuration>
+            <direction>0</direction>
+            <videoCodec>0</videoCodec>
+        </TurntableVideo>
+    </Medium>
+    <ImageSize>
+        <sizePreset>0</sizePreset>
+        <orientation>0</orientation>
+        <width>480</width>
+        <height>640</height>
+        <ratio>false</ratio>
+    </ImageSize>
+    <Etc>
+        <transparentBG>false</transparentBG>
+        <imageUnit>0</imageUnit>
+        <imagePPI>300</imagePPI>
+        <backgroundColor_R>0.85000002</backgroundColor_R>
+        <backgroundColor_G>0.85000002</backgroundColor_G>
+        <backgroundColor_B>0.85000002</backgroundColor_B>
+        <backgroundColor_A>1</backgroundColor_A>
+        <backgroundColor_Name>(None)</backgroundColor_Name>
+        <ColorExposure>0</ColorExposure>
+        <ColorContrast>0</ColorContrast>
+    </Etc>
+</Element>

@@ -1,0 +1,47 @@
+# Blender MTL File: 'black_mug.blend'
+# Material Count: 1
+
+newmtl RedMugMaterial
+Ns 323.999994
+Ka 0.1 0.1 0.1        # Ambient color (dark gray)
+Kd 1.0 0.0 0.0        # Diffuse color (pure red)
+Ks 0.3 0.3 0.3        # Specular color (light gray)
+Ns 50.0              # Shininess
+d 1.0                # Opacity (1.0 = fully opaque)
+map_Kd image2.png
+illum 2              # Illumination model (highlights enabled)
+
+
+# Materials for Mug Parts
+
+newmtl HandleMaterial
+Ka 0.1 0.1 0.2
+Kd 0.0 0.0 1.0
+Ks 0.2 0.2 0.5
+Ns 50.0
+d 1.0
+illum 2
+
+newmtl InsideMaterial
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.1 0.1 0.1
+Ns 10.0
+d 1.0
+illum 2
+
+newmtl BottomMaterial
+Ka 0.0 0.0 0.0
+Kd 0.05 0.05 0.05
+Ks 0.2 0.2 0.2
+Ns 20.0
+d 1.0
+illum 2
+
+newmtl RimMaterial
+Ka 0.1 0.0 0.0
+Kd 1.0 0.0 0.0
+Ks 0.3 0.1 0.1
+Ns 30.0
+d 1.0
+illum 2

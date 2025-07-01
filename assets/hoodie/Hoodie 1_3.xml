@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Environment Version="4.0">
+  <IsWindActivated Value="false" />
+  <IsWindPlanar Value="true" />
+  <WindPosition X="-700.000000" Y="1000.000000" Z="300.000000" />
+  <WindDirection X="0.707107" Y="0.000000" Z="-0.707107" />
+  <WindStrength Value="1000.000000" />
+  <WindDecay Value="0.000000" />
+  <WindFrequency Value="0.000000" />
+  <WindTurbulence Value="30.000000" />
+
+  <Light>
+    <IsEnvironmentLight Value="true" />
+    <IsLightDirectional Value="true" />
+    <IsLightOn Value="true" />
+    <Use Value="false" />
+    <IsLightAttachedOnCamera Value="false" />
+    <IsLightShadow Value="false" />
+    <LightMatrix M11="1.000000" M12="0.000000" M13="0.000000" M14="0.000000"
+                 M21="0.000000" M22="1.000000" M23="0.000000" M24="0.000000"
+                 M31="0.000000" M32="0.000000" M33="1.000000" M34="0.000000"
+                 M41="0.000000" M42="0.000000" M43="0.000000" M44="1.000000" />
+    <LightAmbient R="255" G="255" B="255" A="255" />
+    <LightDiffuse R="255" G="255" B="255" A="255" />
+    <LightSpecular R="255" G="255" B="255" A="255" />
+  </Light>
+
+  <Light>
+    <IsEnvironmentLight Value="false" />
+    <IsLightDirectional Value="true" />
+    <IsLightOn Value="true" />
+    <Use Value="true" />
+    <IsLightAttachedOnCamera Value="false" />
+    <IsLightShadow Value="true" />
+    <LightMatrix M11="0.912871" M12="0.000000" M13="0.408248" M14="1500.000000"
+                 M21="-0.365148" M22="0.447214" M23="0.816497" M24="3000.000000"
+                 M31="-0.182574" M32="-0.894427" M33="0.408248" M34="1500.000000"
+                 M41="0.000000" M42="0.000000" M43="0.000000" M44="1.000000" />
+    <LightAmbient R="150" G="150" B="150" A="255" />
+    <LightDiffuse R="150" G="150" B="150" A="255" />
+    <LightSpecular R="150" G="150" B="150" A="255" />
+  </Light>
+
+  <DoesHandleGroundCollision Value="true" />
+  <GroundHeight Value="0.000000" />
+
+  <IsBackgroundTextureShown Value="true" />
+  <BackgroundColor R="57" G="57" B="59" A="255" />
+</Environment>

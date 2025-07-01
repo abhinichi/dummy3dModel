@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Element>
+    <Header>
+        <LIGHT_PROPERTY_VERSION>1.0</LIGHT_PROPERTY_VERSION>
+    </Header>
+    <LightProperties>
+        <LightIntensity>1</LightIntensity>
+        <LightAngle>0</LightAngle>
+    </LightProperties>
+</Element>

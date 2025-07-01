@@ -1,0 +1,179 @@
+<!--&lt;!&ndash;try 1 - using cdn.skypack &ndash;&gt;-->
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Mug Viewer</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        body { margin: 0; overflow: hidden; }&ndash;&gt;-->
+<!--&lt;!&ndash;        canvas { display: block; }&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<script type="module">&ndash;&gt;-->
+<!--&lt;!&ndash;    import * as THREE from 'https://cdn.skypack.dev/three';&ndash;&gt;-->
+<!--&lt;!&ndash;    import { GLTFLoader } from 'https://cdn.skypack.dev/three/examples/jsm/loaders/GLTFLoader.js';&ndash;&gt;-->
+<!--&lt;!&ndash;    import { OrbitControls } from 'https://cdn.skypack.dev/three/examples/jsm/controls/OrbitControls.js';&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const scene = new THREE.Scene();&ndash;&gt;-->
+<!--&lt;!&ndash;    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);&ndash;&gt;-->
+<!--&lt;!&ndash;    camera.position.z = 3;&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const renderer = new THREE.WebGLRenderer({ antialias: true });&ndash;&gt;-->
+<!--&lt;!&ndash;    renderer.setSize(window.innerWidth, window.innerHeight);&ndash;&gt;-->
+<!--&lt;!&ndash;    document.body.appendChild(renderer.domElement);&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const light = new THREE.DirectionalLight(0xffffff, 1);&ndash;&gt;-->
+<!--&lt;!&ndash;    light.position.set(5, 5, 5);&ndash;&gt;-->
+<!--&lt;!&ndash;    scene.add(light);&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const controls = new OrbitControls(camera, renderer.domElement);&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const loader = new GLTFLoader();&ndash;&gt;-->
+<!--&lt;!&ndash;    loader.load('white_mug.glb', function (gltf) {&ndash;&gt;-->
+<!--&lt;!&ndash;      const mug = gltf.scene;&ndash;&gt;-->
+<!--&lt;!&ndash;      const texture = new THREE.TextureLoader().load('image2.png');&ndash;&gt;-->
+
+<!--&lt;!&ndash;      mug.traverse(function (child) {&ndash;&gt;-->
+<!--&lt;!&ndash;        if (child.isMesh) {&ndash;&gt;-->
+<!--&lt;!&ndash;          child.material.map = texture;&ndash;&gt;-->
+<!--&lt;!&ndash;          child.material.needsUpdate = true;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;      });&ndash;&gt;-->
+
+<!--&lt;!&ndash;      scene.add(mug);&ndash;&gt;-->
+<!--&lt;!&ndash;      animate();&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+
+<!--&lt;!&ndash;    function animate() {&ndash;&gt;-->
+<!--&lt;!&ndash;      requestAnimationFrame(animate);&ndash;&gt;-->
+<!--&lt;!&ndash;      controls.update();&ndash;&gt;-->
+<!--&lt;!&ndash;      renderer.render(scene, camera);&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash; try 2 with ems.sh in place of cds&ndash;&gt;-->
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Mug Viewer</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        body { margin: 0; overflow: hidden; }&ndash;&gt;-->
+<!--&lt;!&ndash;        canvas { display: block; }&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<script type="module">&ndash;&gt;-->
+<!--&lt;!&ndash;    import * as THREE from 'https://esm.sh/three';&ndash;&gt;-->
+<!--&lt;!&ndash;    import { GLTFLoader } from 'https://esm.sh/three/examples/jsm/loaders/GLTFLoader.js';&ndash;&gt;-->
+<!--&lt;!&ndash;    import { OrbitControls } from 'https://esm.sh/three/examples/jsm/controls/OrbitControls.js';&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const scene = new THREE.Scene();&ndash;&gt;-->
+<!--&lt;!&ndash;    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);&ndash;&gt;-->
+<!--&lt;!&ndash;    camera.position.z = 3;&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const renderer = new THREE.WebGLRenderer({ antialias: true });&ndash;&gt;-->
+<!--&lt;!&ndash;    renderer.setSize(window.innerWidth, window.innerHeight);&ndash;&gt;-->
+<!--&lt;!&ndash;    document.body.appendChild(renderer.domElement);&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const light = new THREE.DirectionalLight(0xffffff, 1);&ndash;&gt;-->
+<!--&lt;!&ndash;    light.position.set(5, 5, 5);&ndash;&gt;-->
+<!--&lt;!&ndash;    scene.add(light);&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const controls = new OrbitControls(camera, renderer.domElement);&ndash;&gt;-->
+
+<!--&lt;!&ndash;    const loader = new GLTFLoader();&ndash;&gt;-->
+<!--&lt;!&ndash;    loader.load('white_mug.glb', function (gltf) {&ndash;&gt;-->
+<!--&lt;!&ndash;      const mug = gltf.scene;&ndash;&gt;-->
+<!--&lt;!&ndash;      const texture = new THREE.TextureLoader().load('image2.png');&ndash;&gt;-->
+
+<!--&lt;!&ndash;      mug.traverse(function (child) {&ndash;&gt;-->
+<!--&lt;!&ndash;        if (child.isMesh) {&ndash;&gt;-->
+<!--&lt;!&ndash;          child.material.map = texture;&ndash;&gt;-->
+<!--&lt;!&ndash;          child.material.needsUpdate = true;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;      });&ndash;&gt;-->
+
+<!--&lt;!&ndash;      scene.add(mug);&ndash;&gt;-->
+<!--&lt;!&ndash;      animate();&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+
+<!--&lt;!&ndash;    function animate() {&ndash;&gt;-->
+<!--&lt;!&ndash;      requestAnimationFrame(animate);&ndash;&gt;-->
+<!--&lt;!&ndash;      controls.update();&ndash;&gt;-->
+<!--&lt;!&ndash;      renderer.render(scene, camera);&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <title>Mug Viewer</title>-->
+<!--    <style> body { margin: 0; } canvas { display: block; } </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<script type="module">-->
+<!--    import * as THREE from 'https://esm.sh/three';-->
+<!--    import { GLTFLoader } from 'https://esm.sh/three/examples/jsm/loaders/GLTFLoader.js';-->
+<!--    import { OrbitControls } from 'https://esm.sh/three/examples/jsm/controls/OrbitControls.js';-->
+
+<!--    const scene = new THREE.Scene();-->
+<!--    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);-->
+<!--    camera.position.z = 3;-->
+
+<!--    const renderer = new THREE.WebGLRenderer({ antialias: true });-->
+<!--    renderer.setSize(window.innerWidth, window.innerHeight);-->
+<!--    document.body.appendChild(renderer.domElement);-->
+
+<!--    const light = new THREE.DirectionalLight(0xffffff, 1);-->
+<!--    light.position.set(5, 5, 5);-->
+<!--    scene.add(light);-->
+
+<!--    const controls = new OrbitControls(camera, renderer.domElement);-->
+
+<!--    // Replace with base64 strings from Flutter-->
+<!--    const base64GLB = "__GLB_BASE64__";-->
+<!--    const base64PNG = "__PNG_BASE64__";-->
+
+<!--    const binary = atob(base64GLB);-->
+<!--    const bytes = new Uint8Array(binary.length);-->
+<!--    for (let i = 0; i < binary.length; i++) {-->
+<!--      bytes[i] = binary.charCodeAt(i);-->
+<!--    }-->
+
+<!--    const blob = new Blob([bytes], { type: "model/gltf-binary" });-->
+<!--    const url = URL.createObjectURL(blob);-->
+
+<!--    const loader = new GLTFLoader();-->
+<!--    loader.load(url, function (gltf) {-->
+<!--      const mug = gltf.scene;-->
+<!--      const texture = new THREE.TextureLoader().load(base64PNG);-->
+<!--      mug.traverse(child => {-->
+<!--        if (child.isMesh) {-->
+<!--          child.material.map = texture;-->
+<!--          child.material.needsUpdate = true;-->
+<!--        }-->
+<!--      });-->
+<!--      scene.add(mug);-->
+<!--      animate();-->
+<!--    });-->
+
+<!--    function animate() {-->
+<!--      requestAnimationFrame(animate);-->
+<!--      controls.update();-->
+<!--      renderer.render(scene, camera);-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
