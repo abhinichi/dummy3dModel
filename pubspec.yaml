@@ -46,6 +46,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
   flutter_3d_controller: ^2.2.0
+  model_viewer_plus: ^1.9.3
 #  three_dart_jsm: ^0.0.6  # For GLTFLoader & OrbitControls
 #  webview_flutter: ^4.2.2
 

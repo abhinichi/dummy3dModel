@@ -3,8 +3,11 @@
 // import 'dart:io' as controller;
 
 import 'package:flutter/material.dart';
+
 // import 'package:flutter/services.dart';
 import 'package:flutter_3d_controller/flutter_3d_controller.dart';
+
+import 'model_viewer_plus.dart';
 
 // import 'htmlThreeDModel.dart';
 
@@ -13,9 +16,8 @@ import 'package:flutter_3d_controller/flutter_3d_controller.dart';
 // import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // Setup FlutterGL and Three.js runtime
 
-
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -29,10 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
-      home:
-      // const MugTextureApp(),
-      // const WebViewExample(),
-      MyHomePage(title: 'Flutter 3D Controller Example'),
+      home: MyHomePage(title: 'Flutter 3D Controller Example'),
     );
   }
 }
@@ -83,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           IconButton(
             onPressed: () {
-              // controller.playAnimation();
+             Navigator.of(context).push(MaterialPageRoute(builder: (context) => ModelViewerClass()));
             },
             icon: const Icon(Icons.next_plan_outlined),
           ),
@@ -191,6 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
+      
       body: Container(
         decoration: const BoxDecoration(
           color: Colors.grey,
@@ -327,8 +327,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
-
 /// Try 2
 /// flutter three code
 // import 'dart:async';
@@ -461,7 +459,6 @@ class _MyHomePageState extends State<MyHomePage> {
 //   }
 // }
 
-
 /// try three
 /// Web rencering the 3d model
 //
@@ -589,4 +586,3 @@ class _MyHomePageState extends State<MyHomePage> {
 //     );
 //   }
 // }
-
