@@ -1,3 +1,82 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+class ThreeDViewerPage extends StatefulWidget {
+  @override
+  State<ThreeDViewerPage> createState() => _ThreeDViewerPageState();
+}
+
+class _ThreeDViewerPageState extends State<ThreeDViewerPage> {
+  late final WebViewController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(Colors.transparent)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (url) {
+            debugPrint('Page loaded: $url');
+          },
+        ),
+      );
+
+    _loadHtmlFromAssets();
+  }
+
+  Future<void> _loadHtmlFromAssets() async {
+    final html = await rootBundle.loadString('assets/mug_viewer.html');
+    _controller.loadHtmlString(html, baseUrl: 'assets/');
+  }
+
+  Future<void> _sendGlb(String base64) async {
+    final bytes = await rootBundle.load('assets/model.glb');
+    final base64 = base64Encode(bytes.buffer.asUint8List());
+
+    final jsData = jsonEncode({
+      'type': 'loadModel',
+      'base64': 'data:model/gltf-binary;base64,$base64',
+    });
+   await _controller.runJavaScript("window.postMessage($jsData, '*');");
+  }
+
+
+  Future<void> _sendTextureToWebView(String base64Image) async {
+
+    final jsData = jsonEncode({
+      'type': 'updateTexture',
+      'base64': 'data:image/png;base64,$base64Image',
+    });
+
+    await _controller.runJavaScript("window.postMessage($jsData, '*');");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('3D Viewer')),
+      body: WebViewWidget(controller: _controller),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.texture),
+        onPressed: () async {
+          final bytes = await rootBundle.load('assets/image3.png');
+          final base64 = base64Encode(bytes.buffer.asUint8List());
+          await _sendTextureToWebView(base64);
+        },
+      ),
+    );
+  }
+}
+
+
+
+
+
 // // Copyright 2013 The Flutter Authors. All rights reserved.
 // // Use of this source code is governed by a BSD-style license that can be
 // // found in the LICENSE file.
