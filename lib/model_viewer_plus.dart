@@ -47,34 +47,32 @@ class _ModelViewerClassState extends State<ModelViewerClass> {
     final buffer = bytes.buffer;
     final base64String = base64Encode(buffer.asUint8List());
 
-    final dataUrl = 'data:image/png;base64,$base64String';
-
-
-    final js =
-        '''
-    modelViewer = document.querySelector("model-viewer");
-    mat = modelViewer.model.materials.find(m => m.name === "$materialName");
-    if (mat) {
-      image = new Image();
-       image.crossOrigin = "anonymous";
-     image.src = "$dataUrl";
-      image.onload = () => {
-        texture = modelViewer.createTexture(image);
-        texture.needsUpdate = true;
-         mat.pbrMetallicRoughness.baseColorTexture.texture = texture
-      assignedTexture = mat.pbrMetallicRoughness.baseColorTexture.texture;
-     console.log('assignedTexture: ',assignedTexture);
-     console.log('texture: ',texture);
-       if (assignedTexture === texture) {
-      console.log("✅ Texture successfully applied to material:", mat.name);
+    // 🔥 Escape the base64 string to safely inject in JS
+    // final dataUrl = jsonEncode('data:image/png;base64,$base64String');
+    final dataUrl = jsonEncode('https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Hopetoun_falls.jpg/640px-Hopetoun_falls.jpg');
+    final js = '''
+     modelViewer = document.querySelector("model-viewer");
+     mat = modelViewer.model.materials.find(m => m.name === "$materialName");
+    if (!mat) {
+      console.warn("Material '$materialName' not found");
     } else {
-      console.warn("⚠️ Texture was not set correctly.");
-    }
-  };
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Hopetoun_falls.jpg/640px-Hopetoun_falls.jpg';
+      image.onload = () => {
+        const texture = modelViewer.createTexture(image);
+        mat.pbrMetallicRoughness.baseColorTexture.texture = texture;
 
-  image.onerror = (e) => {
-    console.error("❌ Image failed to load", e);
-  };
+         assignedTexture = mat.pbrMetallicRoughness.baseColorTexture.texture;
+        if (assignedTexture === texture) {
+          console.log("✅ Texture successfully applied to material:", mat.name);
+        } else {
+          console.warn("⚠️ Texture was not set correctly.");
+        }
+      };
+      image.onerror = (e) => {
+        console.error("❌ Image failed to load", e);
+      };
     }
   ''';
     _controller.runJavaScript(js);
@@ -100,7 +98,7 @@ class _ModelViewerClassState extends State<ModelViewerClass> {
               flex: 4,
               child: ModelViewer(
                 backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
-                src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',// 'assets/white_mug.glb',
+                src:  'assets/white_mug.glb',//'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
                 alt: 'A 3D model of an astronaut',
                 // ar: true,
                 arModes: const ['scene-viewer', 'webxr', 'quick-look'],
@@ -150,7 +148,7 @@ class _ModelViewerClassState extends State<ModelViewerClass> {
                         onPressed: () {
                           // _changeColor([1.0, 0.0, 0.0, 1.0]);
                           _setTextureOnMaterial(
-                            'Astronaut_mat',
+                           'mug',// 'Astronaut_mat',
                             // 'https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                           // 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Hopetoun_falls.jpg/640px-Hopetoun_falls.jpg'
                             'assets/image3.png'
