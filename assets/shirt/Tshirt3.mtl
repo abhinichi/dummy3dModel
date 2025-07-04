@@ -1,0 +1,45 @@
+# Blender 4.4.3 MTL File: 'spidyshirt.blend'
+# www.blender.org
+
+newmtl Hanger
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd C:/Users/nichiuser/Desktop/dummy3dModel/dummy3dModel/assets/shirt/HangerAlbedo.png
+map_Ks C:/Users/nichiuser/Desktop/dummy3dModel/dummy3dModel/assets/shirt/HangerRough.png
+map_refl C:/Users/nichiuser/Desktop/dummy3dModel/dummy3dModel/assets/shirt/HangerMetal.png
+map_Bump -bm 0.300000 C:/Users/nichiuser/Desktop/dummy3dModel/dummy3dModel/assets/shirt/Map__13_Normal_Bump.png
+
+newmtl Shirt
+Ns 10.000005
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+
+newmtl backSide
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Ka N:\M n B\_MESH\S mesh\Shirt on Hanger\tshirtimg.png
+
+newmtl front
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.046938 0.072707 0.800016
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Ka N:\M n B\_MESH\S mesh\Shirt on Hanger\tshirtimg.png

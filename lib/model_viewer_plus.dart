@@ -177,7 +177,7 @@ modelViewer.loaded.then(() => {
               flex: 4,
               child: ModelViewer(
                 backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
-                src:  'assets/white_mug.glb',//'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+                src:  'assets/Untitled.glb',//'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
                 alt: 'A 3D model of an astronaut',
                 // ar: true,
                 arModes: const ['scene-viewer', 'webxr', 'quick-look'],
