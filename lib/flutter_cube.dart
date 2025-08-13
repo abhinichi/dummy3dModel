@@ -113,3 +113,33 @@
 // }
 //
 // void main() => runApp(const MaterialApp(home: MugTextureApp()));
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_cube/flutter_cube.dart';
+
+class CupScene extends StatelessWidget {
+  const CupScene({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Flutter cube'),),
+      body: Cube(
+        onSceneCreated: (Scene scene) {
+          final cup = Object(fileName: 'assets/mug/base.obj');
+          final lid = Object(fileName: 'assets/mug/lid.obj');
+          final handle = Object(fileName: 'assets/mug/handle-01.obj');
+
+          lid.position.setValues(0, 1, 0);
+          handle.position.setValues(1.5, 0, 0);
+
+          scene.world.add(cup);
+          scene.world.add(lid);
+          scene.world.add(handle);
+      
+          scene.camera.zoom = 5;
+        },
+      ),
+    );
+  }
+}

@@ -6,6 +6,7 @@ import 'package:dummy_model/htmlThreeDModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3d_controller/flutter_3d_controller.dart';
 
+import 'flutter_cube.dart';
 import 'model_viewer_plus.dart';
 
 void main() {
@@ -42,19 +43,27 @@ class _MyHomePageState extends State<MyHomePage> {
   String? chosenAnimation;
   String? chosenTexture;
   bool changeModel = false;
+  String srcObj = '';
+
+  /// obj files
+  String cup = 'assets/mug/base.obj';
+  String lid = 'assets/mug/lid.obj';
+  String handle1 = 'assets/mug/handle-01.obj';
+  String handle2 = 'assets/mug/handle-02.obj';
   String shirtObj = 'assets/shirt/Shirt_on_Hanger.obj';
-  String SPORTSHIRT = 'assets/shirt/Tshirt3.obj';
+  String sportShirt = 'assets/shirt/Tshirt3.obj';
   String spidyShirtObj = 'assets/spidyShirt/objShirt.obj';
   String mugObj = 'assets/black_mug.obj';
-  String srcGlb = 'assets/white_mug.glb';
-  String srcObj = '';
   String myMugObj = 'assets/my3dMug5.obj';
+
+  ///glb files
+  String srcGlb = 'assets/white_mug.glb';
   String myMugGlb = 'assets/untitled.glb';
 
   @override
   void initState() {
     super.initState();
-    srcObj = myMugObj;
+    srcObj = cup;
     controller.onModelLoaded.addListener(() {
       debugPrint('model is loaded : ${controller.onModelLoaded.value}');
     });
@@ -74,7 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           IconButton(
             onPressed: () {
-             Navigator.of(context).push(MaterialPageRoute(builder: (context) => ModelViewerClass()));
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ModelViewerClass()),
+              );
             },
             icon: const Icon(Icons.next_plan_outlined),
           ),
@@ -84,9 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: const Icon(Icons.play_arrow),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
           IconButton(
             onPressed: () {
               controller.pauseAnimation();
@@ -94,26 +103,26 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: const Icon(Icons.pause),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
           IconButton(
             onPressed: () {
               controller.resetAnimation();
             },
             icon: const Icon(Icons.replay),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
           IconButton(
             onPressed: () async {
-              List<String> availableAnimations =
-              await controller.getAvailableAnimations();
+              List<String> availableAnimations = await controller
+                  .getAvailableAnimations();
               debugPrint(
-                  'Animations : $availableAnimations --- Length : ${availableAnimations.length}');
+                'Animations : $availableAnimations --- Length : ${availableAnimations.length}',
+              );
               chosenAnimation = await showPickerDialog(
-                  'Animations', availableAnimations, chosenAnimation);
+                'Animations',
+                availableAnimations,
+                chosenAnimation,
+              );
               //Play animation with loop count
               controller.playAnimation(
                 animationName: chosenAnimation,
@@ -122,24 +131,24 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: const Icon(Icons.format_list_bulleted_outlined),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
           IconButton(
             onPressed: () async {
-              List<String> availableTextures =
-              await controller.getAvailableTextures();
+              List<String> availableTextures = await controller
+                  .getAvailableTextures();
               debugPrint(
-                  'Textures : $availableTextures --- Length : ${availableTextures.length}');
+                'Textures : $availableTextures --- Length : ${availableTextures.length}',
+              );
               chosenTexture = await showPickerDialog(
-                  'Textures', availableTextures, chosenTexture);
+                'Textures',
+                availableTextures,
+                chosenTexture,
+              );
               controller.setTexture(textureName: chosenTexture ?? '');
             },
             icon: const Icon(Icons.list_alt_rounded),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
           IconButton(
             onPressed: () {
               controller.setCameraOrbit(20, 20, 5);
@@ -147,9 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: const Icon(Icons.camera_alt_outlined),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
           IconButton(
             onPressed: () {
               controller.resetCameraOrbit();
@@ -157,9 +164,9 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: const Icon(Icons.cameraswitch_outlined),
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
+
+          /// on click of this button it will toggle the obj and glb files
           IconButton(
             onPressed: () {
               setState(() {
@@ -167,19 +174,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 chosenAnimation = null;
                 chosenTexture = null;
                 if (changeModel) {
-                  srcObj = shirtObj;
+                  srcObj = lid;
                   srcGlb = myMugGlb;
                 } else {
-                  srcObj = SPORTSHIRT;
+                  srcObj = cup;
                   srcGlb = 'assets/white_mug.glb';
                 }
               });
             },
-            icon: const Icon(
-              Icons.restore_page_outlined,
-              size: 30,
-            ),
-          )
+            icon: const Icon(Icons.restore_page_outlined, size: 30),
+          ),
         ],
       ),
       body: Column(
@@ -191,10 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: const BoxDecoration(
                 color: Colors.grey,
                 gradient: RadialGradient(
-                  colors: [
-                    Color(0xff919ded),
-                    Colors.grey,
-                  ],
+                  colors: [Color(0xff919ded), Colors.grey],
                   stops: [0.1, 1.0],
                   radius: 0.7,
                   center: Alignment.center,
@@ -204,6 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
+                  /// obg file rendered
                   Flexible(
                     flex: 1,
                     child: Flutter3DViewer.obj(
@@ -232,6 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     ),
                   ),
+                  /// glb file rendered
                   // Flexible(
                   //   flex: 1,
                   //   child: Flutter3DViewer(
@@ -265,13 +268,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   //     //src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // 3D model from URL
                   //   ),
                   // ),
-
-
                 ],
               ),
             ),
           ),
-          Flexible(flex: 1,
+
+          /// model viewer flutter package example code
+          Flexible(
+            flex: 1,
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
@@ -281,17 +285,31 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('model viewer package screen'),
             ),
           ),
+          // Flexible(
+          //   flex: 1,
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(bottom: 12.0),
+          //     child: ElevatedButton(
+          //       onPressed: () {
+          //         Navigator.of(context).push(
+          //           MaterialPageRoute(builder: (context) => ThreeDViewerPage()),
+          //         );
+          //       },
+          //       child: Text('three js package screen'),
+          //     ),
+          //   ),
+          // ),
           Flexible(
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ThreeDViewerPage()),
-                  );
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute(builder: (context) => CupScene()));
                 },
-                child: Text('three js package screen'),
+                child: Text('Flutter cube package screen '),
               ),
             ),
           ),
