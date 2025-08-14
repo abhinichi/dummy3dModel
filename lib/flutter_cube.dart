@@ -127,14 +127,19 @@ class CupScene extends StatelessWidget {
       body: Cube(
         onSceneCreated: (Scene scene) {
           final cup = Object(fileName: 'assets/mug/base.obj');
-          final lid = Object(fileName: 'assets/mug/lid.obj');
-          final handle = Object(fileName: 'assets/mug/handle-01.obj');
+          cup.position.setValues(0, 0, 0);
 
-          lid.position.setValues(0, 1, 0);
+          final lid = Object(fileName: 'assets/mug/lid.obj');
+          lid.position.setValues(0, 4, 0);
+
+          final handle = Object(fileName: 'assets/mug/handle-01.obj');
           handle.position.setValues(1.5, 0, 0);
 
-          scene.world.add(cup);
-          scene.world.add(lid);
+          handle.rotation.setValues(0, 20, 0); // rotate 45° around Y-axis
+          handle.scale.setValues(2, 2, 2); // scale up 20%
+
+          // scene.world.add(lid);
+          // scene.world.add(cup);
           scene.world.add(handle);
       
           scene.camera.zoom = 5;
