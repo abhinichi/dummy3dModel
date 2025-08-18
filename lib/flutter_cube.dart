@@ -113,37 +113,127 @@
 // }
 //
 // void main() => runApp(const MaterialApp(home: MugTextureApp()));
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 
-class CupScene extends StatelessWidget {
+
+class CupScene extends StatefulWidget {
   const CupScene({super.key});
 
   @override
+  State<CupScene> createState() => _CupSceneState();
+}
+
+class _CupSceneState extends State<CupScene> {
+  bool changeModel = false;
+
+  /// new jitaku models
+  String cup1 = 'assets/jitaku/base.obj';
+  String lid1 = 'assets/jitaku/lid.obj';
+  String canister = 'assets/jitaku/Canister.obj';
+  String newHandle1 = 'assets/jitaku/handle-01.obj';
+  String newHandle2 = 'assets/jitaku/handle-02.obj';
+  String newHeartHandle = 'assets/jitaku/Heart.obj';
+  String normal = 'assets/jitaku/Nomal.obj';
+
+  String srcObj = '';
+
+  @override
+  void initState() {
+    super.initState();
+    srcObj = cup1;
+  }
+  double angleY = 0;
+
+  void rotateObject() {
+    setState(() {
+      angleY += 10; // increase by 10°
+    });
+  }
+
+
+  @override
   Widget build(BuildContext context) {
+    debugPrint('angleY: $angleY');
     return Scaffold(
-      appBar: AppBar(title: Text('Flutter cube'),),
-      body: Cube(
-        onSceneCreated: (Scene scene) {
-          final cup = Object(fileName: 'assets/mug/base.obj');
-          cup.position.setValues(0, 0, 0);
-
-          final lid = Object(fileName: 'assets/mug/lid.obj');
-          lid.position.setValues(0, 4, 0);
-
-          final handle = Object(fileName: 'assets/mug/handle-01.obj');
-          handle.position.setValues(1.5, 0, 0);
-
-          handle.rotation.setValues(0, 20, 0); // rotate 45° around Y-axis
-          handle.scale.setValues(2, 2, 2); // scale up 20%
-
-          // scene.world.add(lid);
-          // scene.world.add(cup);
-          scene.world.add(handle);
-      
-          scene.camera.zoom = 5;
-        },
+      appBar: AppBar(title: const Text('Flutter cube')),
+      body: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child:
+            Cube(
+              key: ValueKey("$srcObj-$angleY"), // rebuild when angle changes
+              onSceneCreated: (Scene scene) {
+                final obj = Object(fileName: srcObj);
+                obj.rotation.setValues(0, angleY, 0); // apply rotation
+                scene.world.add(obj);
+                scene.camera.zoom = 5;
+              },
+            )
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                tooltip: 'cup obj',
+                onPressed: () {
+                  setState(() {
+                    srcObj = cup1;
+                    rotateObject();
+                  });
+                },
+                icon: const Icon(Icons.looks_one),
+              ),
+              IconButton(
+                tooltip: 'canister obj',
+                onPressed: () {
+                  setState(() {
+                    srcObj = canister;
+                  });
+                },
+                icon: const Icon(Icons.looks_two),
+              ),
+              IconButton(
+                tooltip: 'lid obj',
+                onPressed: () {
+                  setState(() {
+                    srcObj = lid1;
+                  });
+                },
+                icon: const Icon(Icons.looks_3),
+              ),
+              IconButton(
+                tooltip: 'normal obj',
+                onPressed: () {
+                  setState(() {
+                    srcObj = normal;
+                  });
+                },
+                icon: const Icon(Icons.looks_4),
+              ),
+              IconButton(
+                tooltip: 'Heart obj',
+                onPressed: () {
+                  setState(() {
+                    srcObj = newHeartHandle;
+                  });
+                },
+                icon: const Icon(Icons.looks_5),
+              ),
+              IconButton(
+                tooltip: changeModel ? 'handle 1 obj' : 'handle 2 obj',
+                onPressed: () {
+                  setState(() {
+                    changeModel = !changeModel;
+                    srcObj = changeModel ? newHandle1 : newHandle2;
+                  });
+                },
+                icon: const Icon(Icons.looks_6, size: 30),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
