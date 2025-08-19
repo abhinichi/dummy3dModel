@@ -8,6 +8,7 @@ import 'package:dummy_model/htmlThreeDModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3d_controller/flutter_3d_controller.dart';
 
+import 'flu_3d_controller.dart';
 import 'flutter_cube.dart';
 import 'model_viewer_plus.dart';
 
@@ -72,8 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String lidglb =  'assets/jitaku/lid.glb';
   String canisterglb =  'assets/jitaku/canister.glb';
   String srcGlb =  'assets/jitaku/lid.glb';
-  // String srcGlb =  'assets/jitaku/lid.glb';
-  // String srcGlb =  'assets/jitaku/lid.glb';
   String myMugGlb = 'assets/untitled.glb';
 
   @override
@@ -351,7 +350,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.of(
                     context,
-                  ).push(MaterialPageRoute(builder: (context) => CupScene()));
+                  ).push(MaterialPageRoute(builder: (context) => GLBTextureChangeExample()));
                 },
                 child: Text('Flutter cube package screen '),
               ),
