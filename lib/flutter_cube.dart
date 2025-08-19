@@ -145,6 +145,8 @@ class _CupSceneState extends State<CupScene> {
   }
   double angleY = 0;
 
+  double posX = 0;
+
   void rotateObject() {
     setState(() {
       angleY += 10; // increase by 10°
@@ -163,10 +165,11 @@ class _CupSceneState extends State<CupScene> {
             height: MediaQuery.of(context).size.height * 0.8,
             child:
             Cube(
-              key: ValueKey("$srcObj-$angleY"), // rebuild when angle changes
+              key: ValueKey("$srcObj-$angleY-$posX"),
               onSceneCreated: (Scene scene) {
                 final obj = Object(fileName: srcObj);
-                obj.rotation.setValues(0, angleY, 0); // apply rotation
+                obj.position.setValues(posX, 0, 0);
+                obj.rotation.setValues(0, angleY, 0);
                 scene.world.add(obj);
                 scene.camera.zoom = 5;
               },
@@ -180,6 +183,8 @@ class _CupSceneState extends State<CupScene> {
                 onPressed: () {
                   setState(() {
                     srcObj = cup1;
+                    angleY += 30;
+                    posX += 1;
                     rotateObject();
                   });
                 },

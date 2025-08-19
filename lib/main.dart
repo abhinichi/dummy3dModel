@@ -2,6 +2,8 @@
 // import 'dart:convert';
 // import 'dart:io' as controller;
 
+import 'dart:math' as Math;
+
 import 'package:dummy_model/htmlThreeDModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3d_controller/flutter_3d_controller.dart';
@@ -66,7 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
   String normal = 'assets/jitaku/Nomal.obj';
 
   ///glb files
-  String srcGlb = 'assets/white_mug.glb';
+  String handle1glb =  'assets/jitaku/handle-1.glb';
+  String lidglb =  'assets/jitaku/lid.glb';
+  String canisterglb =  'assets/jitaku/canister.glb';
+  String srcGlb =  'assets/jitaku/lid.glb';
+  // String srcGlb =  'assets/jitaku/lid.glb';
+  // String srcGlb =  'assets/jitaku/lid.glb';
   String myMugGlb = 'assets/untitled.glb';
 
   @override
@@ -136,77 +143,89 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             tooltip: 'Heart obj',
             onPressed: () async {
-              // List<String> availableAnimations = await controller
-              //     .getAvailableAnimations();
-              // debugPrint(
-              //   'Animations : $availableAnimations --- Length : ${availableAnimations.length}',
-              // );
-              // chosenAnimation = await showPickerDialog(
-              //   'Animations',
-              //   availableAnimations,
-              //   chosenAnimation,
-              // );
-              // //Play animation with loop count
-              // controller.playAnimation(
-              //   animationName: chosenAnimation,
-              //   loopCount: 2,
-              // );
+              List<String> availableAnimations = await controller
+                  .getAvailableAnimations();
+              debugPrint(
+                'Animations : $availableAnimations --- Length : ${availableAnimations.length}',
+              );
+              chosenAnimation = await showPickerDialog(
+                'Animations',
+                availableAnimations,
+                chosenAnimation,
+              );
+              //Play animation with loop count
+              controller.playAnimation(
+                animationName: chosenAnimation,
+                loopCount: 2,
+              );
               setState(() {
                 srcObj = newHeartHandle;
               });
             },
             icon: const Icon(Icons.looks_5),
           ),
-          // const SizedBox(height: 4),
-          // IconButton(
-          //   tooltip: 'normal obj',
-          //   onPressed: () async {
-          //     // List<String> availableTextures = await controller
-          //     //     .getAvailableTextures();
-          //     // debugPrint(
-          //     //   'Textures : $availableTextures --- Length : ${availableTextures.length}',
-          //     // );
-          //     // chosenTexture = await showPickerDialog(
-          //     //   'Textures',
-          //     //   availableTextures,
-          //     //   chosenTexture,
-          //     // );
-          //     // controller.setTexture(textureName: chosenTexture ?? '');
-          //   },
-          //   icon: const Icon(Icons.list_alt_rounded),
-          // ),
-          // const SizedBox(height: 4),
-          // IconButton(
-          //   onPressed: () {
-          //     controller.setCameraOrbit(20, 20, 5);
-          //     //controller.setCameraTarget(0.3, 0.2, 0.4);
-          //   },
-          //   icon: const Icon(Icons.camera_alt_outlined),
-          // ),
-          // const SizedBox(height: 4),
-          // IconButton(
-          //   onPressed: () {
-          //     controller.resetCameraOrbit();
-          //     //controller.resetCameraTarget();
-          //   },
-          //   icon: const Icon(Icons.cameraswitch_outlined),
-          // ),
+          const SizedBox(height: 4),
+          IconButton(
+            tooltip: 'normal obj',
+            onPressed: () async {
+              List<String> availableTextures = await controller
+                  .getAvailableTextures();
+              debugPrint(
+                'Textures : $availableTextures --- Length : ${availableTextures.length}',
+              );
+              chosenTexture = await showPickerDialog(
+                'Textures',
+                availableTextures,
+                chosenTexture,
+              );
+              controller.setTexture(textureName: 'assets/jitaku/image.jpg');
+            },
+            icon: const Icon(Icons.list_alt_rounded),
+          ),
+          const SizedBox(height: 4),
+          IconButton(
+            onPressed: () {
+              controller.setCameraOrbit(20, 20, 5);
+              controller.setCameraTarget(0.3, 0.2, 0.4);
+            },
+            icon: const Icon(Icons.camera_alt_outlined),
+          ),
+          const SizedBox(height: 4),
+          IconButton(
+            onPressed: () {
+              controller.resetCameraOrbit();
+              controller.resetCameraTarget();
+            },
+            icon: const Icon(Icons.cameraswitch_outlined),
+          ),
           const SizedBox(height: 4),
 
           /// on click of this button it will toggle the handle 1 and handle 2 obj files
           IconButton(
             tooltip: changeModel? 'handle 1 obj':'handle 2 obj',
-            onPressed: () {
+            onPressed: () async {
+              List<String> availableTextures = await controller
+                  .getAvailableTextures();
+              debugPrint(
+                'Textures : $availableTextures --- Length : ${availableTextures.length}',
+              );
+              chosenTexture = await showPickerDialog(
+                'Material.008',
+                availableTextures,
+                chosenTexture,
+              );
+              controller.setTexture(textureName: 'assets/jitaku/image.jpg');
+
               setState(() {
                 changeModel = !changeModel;
                 chosenAnimation = null;
                 chosenTexture = null;
                 if (changeModel) {
                   srcObj = newHandle1;
-                  // srcGlb = myMugGlb;
+                  srcGlb = canisterglb;
                 } else {
                   srcObj = newHandle2;
-                  // srcGlb = 'assets/white_mug.glb';
+                  srcGlb = lidglb;
                 }
               });
             },
@@ -234,47 +253,17 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   /// obg file rendered
-                  Flexible(
-                    flex: 1,
-                    child: Flutter3DViewer.obj(
-                      src: srcObj,
-                      //src : 'assets/flutter_dash.obj',
-                      //src: 'https://raw.githubusercontent.com/m-r-davari/content-holder/refs/heads/master/flutter_3d_controller/flutter_dash_model/flutter_dash.obj',
-                      scale: 5,
-                      // Initial scale of obj model
-                      cameraX: 0,
-                      // Initial cameraX position of obj model
-                      cameraY: 0,
-                      //Initial cameraY position of obj model
-                      cameraZ: 10,
-                      //Initial cameraZ position of obj model
-                      //This callBack will return the loading progress value between 0 and 1.0
-                      onProgress: (double progressValue) {
-                        debugPrint('model loading progress : $progressValue');
-                      },
-                      //This callBack will call after model loaded successfully and will return model address
-                      onLoad: (String modelAddress) {
-                        debugPrint('model loaded : $modelAddress');
-                      },
-                      //this callBack will call when model failed to load and will return failure erro
-                      onError: (String error) {
-                        debugPrint('model failed to load : $error');
-                      },
-                    ),
-                  ),
-                  /// glb file rendered
                   // Flexible(
                   //   flex: 1,
-                  //   child: Flutter3DViewer(
-                  //     //If you pass 'true' the flutter_3d_controller will add gesture interceptor layer
-                  //     //to prevent gesture recognizers from malfunctioning on iOS and some Android devices.
-                  //     // the default value is true.
-                  //     activeGestureInterceptor: true,
-                  //     //If you don't pass progressBarColor, the color of defaultLoadingProgressBar will be grey.
-                  //     //You can set your custom color or use [Colors.transparent] for hiding loadingProgressBar.
-                  //     progressBarColor: Colors.orange,
-                  //     //You can disable viewer touch response by setting 'enableTouch' to 'false'
-                  //     enableTouch: true,
+                  //   child: Flutter3DViewer.obj(
+                  //     src: srcObj,
+                  //     //src : 'assets/flutter_dash.obj',
+                  //     //src: 'https://raw.githubusercontent.com/m-r-davari/content-holder/refs/heads/master/flutter_3d_controller/flutter_dash_model/flutter_dash.obj',
+                  //     scale: 5,
+                  //     cameraX: cameraX* Math.cos(0),
+                  //     cameraY: cameraY* Math.sin(0),
+                  //     cameraZ: cameraZ,
+                  //     //Initial cameraZ position of obj model
                   //     //This callBack will return the loading progress value between 0 and 1.0
                   //     onProgress: (double progressValue) {
                   //       debugPrint('model loading progress : $progressValue');
@@ -282,20 +271,47 @@ class _MyHomePageState extends State<MyHomePage> {
                   //     //This callBack will call after model loaded successfully and will return model address
                   //     onLoad: (String modelAddress) {
                   //       debugPrint('model loaded : $modelAddress');
-                  //       controller.playAnimation();
                   //     },
-                  //     //this callBack will call when model failed to load and will return failure error
+                  //     //this callBack will call when model failed to load and will return failure erro
                   //     onError: (String error) {
                   //       debugPrint('model failed to load : $error');
                   //     },
-                  //     //You can have full control of 3d model animations, textures and camera
-                  //     controller: controller,
-                  //     src: srcGlb,
-                  //     // src: 'assets/business_man.glb', //3D model with different animations
-                  //     //src: 'assets/sheen_chair.glb', //3D model with different textures
-                  //     //src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // 3D model from URL
                   //   ),
                   // ),
+                  /// glb file rendered
+                  Flexible(
+                    flex: 1,
+                    child: Flutter3DViewer(
+                      //If you pass 'true' the flutter_3d_controller will add gesture interceptor layer
+                      //to prevent gesture recognizers from malfunctioning on iOS and some Android devices.
+                      // the default value is true.
+                      activeGestureInterceptor: true,
+                      //If you don't pass progressBarColor, the color of defaultLoadingProgressBar will be grey.
+                      //You can set your custom color or use [Colors.transparent] for hiding loadingProgressBar.
+                      progressBarColor: Colors.orange,
+                      //You can disable viewer touch response by setting 'enableTouch' to 'false'
+                      enableTouch: true,
+                      //This callBack will return the loading progress value between 0 and 1.0
+                      onProgress: (double progressValue) {
+                        debugPrint('model loading progress : $progressValue');
+                      },
+                      //This callBack will call after model loaded successfully and will return model address
+                      onLoad: (String modelAddress) {
+                        debugPrint('model loaded : $modelAddress');
+                        controller.playAnimation();
+                      },
+                      //this callBack will call when model failed to load and will return failure error
+                      onError: (String error) {
+                        debugPrint('model failed to load : $error');
+                      },
+                      //You can have full control of 3d model animations, textures and camera
+                      controller: controller,
+                      src: srcGlb,
+                      // src: 'assets/business_man.glb', //3D model with different animations
+                      //src: 'assets/sheen_chair.glb', //3D model with different textures
+                      //src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // 3D model from URL
+                    ),
+                  ),
                 ],
               ),
             ),
