@@ -128,7 +128,7 @@ class _CupSceneState extends State<CupScene> {
   bool changeModel = false;
 
   /// new jitaku models
-  String cup1 = 'assets/jitaku/base.obj';
+  String cup1 = 'assets/jitaku/Heart_Boolean.obj';
   String lid1 = 'assets/jitaku/lid.obj';
   String canister = 'assets/jitaku/Canister.obj';
   String newHandle1 = 'assets/jitaku/handle-01.obj';

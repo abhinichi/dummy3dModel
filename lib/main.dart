@@ -63,8 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String cup1 = 'assets/jitaku/base.obj';
   String lid1 = 'assets/jitaku/lid.obj';
   String canister = 'assets/jitaku/Canister.obj';
-  String newHandle1 = 'assets/jitaku/handle-01.obj';
-  String newHandle2 = 'assets/jitaku/handle-02.obj';
+  String heartMug1 = 'assets/jitaku/heartMug2.1.obj';
+  String heartMug2 = 'assets/jitaku/heartMug1.obj';
   String newHeartHandle = 'assets/jitaku/Heart.obj';
   String normal = 'assets/jitaku/Nomal.obj';
 
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    srcObj = 'assets/mug/myCupHandle.obj';
+    srcObj = 'assets/jitaku/Heart_Boolean.obj';
     controller.onModelLoaded.addListener(() {
       debugPrint('model is loaded : ${controller.onModelLoaded.value}');
     });
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             tooltip: 'cup obj',
             onPressed: () {
               setState(() {
-                srcObj = cup1;
+                srcObj = cup;
               });
             },
             icon: const Icon(Icons.looks_one),
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
             tooltip: 'lid obj',
             onPressed: () {
               setState(() {
-                srcObj = lid1;
+                srcObj = lid;
               });
               // controller.pauseAnimation();
               //controller.stopAnimation();
@@ -220,10 +220,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 chosenAnimation = null;
                 chosenTexture = null;
                 if (changeModel) {
-                  srcObj = newHandle1;
+                  srcObj = heartMug1;
                   srcGlb = canisterglb;
                 } else {
-                  srcObj = newHandle2;
+                  srcObj = heartMug2;
                   srcGlb = lidglb;
                 }
               });
@@ -252,31 +252,34 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   /// obg file rendered
-                  // Flexible(
-                  //   flex: 1,
-                  //   child: Flutter3DViewer.obj(
-                  //     src: srcObj,
-                  //     //src : 'assets/flutter_dash.obj',
-                  //     //src: 'https://raw.githubusercontent.com/m-r-davari/content-holder/refs/heads/master/flutter_3d_controller/flutter_dash_model/flutter_dash.obj',
-                  //     scale: 5,
-                  //     cameraX: cameraX* Math.cos(0),
-                  //     cameraY: cameraY* Math.sin(0),
-                  //     cameraZ: cameraZ,
-                  //     //Initial cameraZ position of obj model
-                  //     //This callBack will return the loading progress value between 0 and 1.0
-                  //     onProgress: (double progressValue) {
-                  //       debugPrint('model loading progress : $progressValue');
-                  //     },
-                  //     //This callBack will call after model loaded successfully and will return model address
-                  //     onLoad: (String modelAddress) {
-                  //       debugPrint('model loaded : $modelAddress');
-                  //     },
-                  //     //this callBack will call when model failed to load and will return failure erro
-                  //     onError: (String error) {
-                  //       debugPrint('model failed to load : $error');
-                  //     },
-                  //   ),
-                  // ),
+                  Flexible(
+                    flex: 1,
+                    child: Flutter3DViewer.obj(
+                      src: srcObj,
+                      //src : 'assets/flutter_dash.obj',
+                      //src: 'https://raw.githubusercontent.com/m-r-davari/content-holder/refs/heads/master/flutter_3d_controller/flutter_dash_model/flutter_dash.obj',
+                      scale: 5,
+                      // Initial scale of obj model
+                      cameraX: 0,
+                      // Initial cameraX position of obj model
+                      cameraY: 0,
+                      //Initial cameraY position of obj model
+                      cameraZ: 10,
+                      //Initial cameraZ position of obj model
+                      //This callBack will return the loading progress value between 0 and 1.0
+                      onProgress: (double progressValue) {
+                        debugPrint('model loading progress : $progressValue');
+                      },
+                      //This callBack will call after model loaded successfully and will return model address
+                      onLoad: (String modelAddress) {
+                        debugPrint('model loaded : $modelAddress');
+                      },
+                      //this callBack will call when model failed to load and will return failure erro
+                      onError: (String error) {
+                        debugPrint('model failed to load : $error');
+                      },
+                    ),
+                  ),
                   /// glb file rendered
                   Flexible(
                     flex: 1,
@@ -350,7 +353,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.of(
                     context,
-                  ).push(MaterialPageRoute(builder: (context) => GLBTextureChangeExample()));
+                  ).push(MaterialPageRoute(builder: (context) => CupScene()));
                 },
                 child: Text('Flutter cube package screen '),
               ),
